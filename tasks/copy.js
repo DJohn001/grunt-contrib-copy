@@ -41,16 +41,14 @@ module.exports = function(grunt) {
     };
 
     this.files.forEach(function(filePair) {
-      var dest = filePair.dest;
+      var _dest = filePair.dest;
       isExpandedPair = filePair.orig.expand || false;
 
       filePair.src.forEach(function(src) {
         src = unixifyPath(src);
-        dest = unixifyPath(dest);
+        _dest = unixifyPath(_dest);
 
-        if (detectDestType(dest) === 'directory') {
-          dest = (isExpandedPair) ? dest : path.join(dest, src);
-        }
+        var dest = path.join(_dest, src);
 
         if (grunt.file.isDir(src)) {
           grunt.verbose.writeln('Creating ' + chalk.cyan(dest));
